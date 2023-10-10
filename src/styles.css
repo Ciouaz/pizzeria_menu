@@ -3,8 +3,17 @@
 
 body{
     margin-top:00px;
-    background: #011a0f;
+    background-image: url("https://t3.ftcdn.net/jpg/03/40/93/00/360_F_340930009_WtmPbofCmuBGo3SxTR59e3qUrUs8Bm2Y.jpg");
+
 }
+
+.headerh2 {
+    
+    font-size: 20px;
+    font-weight: 100;
+    color: #000000;
+
+  }
 .card {
     border: none;
     -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
@@ -14,22 +23,39 @@ body{
 .w-60 {
     width: 100px;
 }
-h1, h2, h3, h4, h5, h6 {
-    margin: 0 0 0px;
-    font-weight: 600;
-}
-.social-links li a {
-    -webkit-border-radius: 50%;
-    background-color: rgba(89,206,181,.85);
-    border-radius: 50%;
-    color: #fff;
-    display: inline-block;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    width: 30px;
-    font-size: 12px;
-}
+
 a {
     color: #941f1f;
 }
+
+#neubar {
+    background: #fae8d2;
+    box-shadow: 4px 6px 12px rgba(0,0,0,0.4)
+  }
+  
+  .nav-item .active {
+    border-radius: 6px;
+    background: linear-gradient(145deg, #ffe7ca, #f5d7b2);
+    box-shadow:  4px 4px 8px #ddc1a0,
+                 -4px -4px 8px #f7e5cc;
+  }
+  #neubar .dropdown-menu a:hover {
+    color: #454545
+  }
+  #neubar .nav-item {
+    margin : auto 4px;
+  }
+  #neubar a {
+  
+    padding-left:12px;
+    padding-right:12px;
+  }
+  #neubar .dropdown-menu {
+    background : #545454
+  }
+  a.navbar-brand {
+    color: #454545
+  }
+
+
+  
