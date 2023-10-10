@@ -8,28 +8,26 @@ body{
 }
 
 .headerh2 {
-    
     font-size: 20px;
     font-weight: 100;
     color: #000000;
-
+    
   }
+
 .card {
-    border: none;
-    -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+    background: #fae8d2e2;
+    height: 280px;
+    border-radius: 30px;
+    box-shadow:  4px 4px 8px #ddc1a0,
+                 -4px -4px 8px #f7e5cc;
     margin-bottom: 30px;
 }
 .w-60 {
     width: 100px;
 }
 
-a {
-    color: #941f1f;
-}
-
 #neubar {
-    background: #fae8d2;
+    background: #9a7343e2;
     box-shadow: 4px 6px 12px rgba(0,0,0,0.4)
   }
   
@@ -56,6 +54,4 @@ a {
   a.navbar-brand {
     color: #454545
   }
-
-
   

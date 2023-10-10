@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-light" id="neubar">
    <div class="container">
-     <div class="navbar-brand" href="#"><img src="https://png.pngtree.com/png-vector/20220705/ourmid/pngtree-pizza-logo-design-png-image_5683063.png" height="100" />
+     <div class="navbar-brand" href="#"><img src="https://png.pngtree.com/png-vector/20220705/ourmid/pngtree-pizza-logo-design-png-image_5683063.png" height="100"/>
       </div>
       <li class="navbar-brand">Admin panel:</li>
       <div class=" collapse navbar-collapse" id="navbarNavDropdown">
@@ -12,15 +12,21 @@
    
      </div>
      <form class="form-inline my-2 my-lg-0">
-      <input type="search" (ngModelChange)="searchePizzas(key.value)" #key="ngModel" ngModel
+      <input type="search"
+      style="box-shadow: 4px 4px 8px #ddc1a0, -4px -4px 8px #f7e5cc; 
+      background-image: url(https://cdn2.hubspot.net/hubfs/4004166/bioticresearch_website_assets/images/search_icon.png);
+      background-repeat: no-repeat;
+      background-position: right center;
+      " 
+      (ngModelChange)="searchePizzas(key.value)" #key="ngModel" ngModel
       name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search pizza..." required>
    </form> 
    </div>
  </nav>
 
 
-<div>
-   <h1>&nbsp;</h1>
+<div style="margin-bottom: 30px;">
+   &nbsp;
 </div>
 
 
@@ -28,14 +34,14 @@
   <div class="row">
       <div *ngFor="let pizza of pizzas" class="col-md-6 col-x1-3">
           <div class="card m-b-30">
-              <div class="card-body row" >
+              <div class="card-body row">
                   <div class="col-6">
                       <img src="{{pizza?.pictureURL}}" alt="" class="img-fluid rounded-circle w-100">
                   </div>
                   <div class="col-6 card-title align-self-center mb-0">
                       <h5><i *ngIf="pizza?.vegan" class="fa fa-leaf" style="color: #075905;"></i>{{pizza?.name}} </h5>
-                      <p class="m-0" style="color: #000000aa;">{{pizza?.ingredients}}</p>
-                      <p class="m-0" style="color: #f0ec13;"><i class="fa fa-dollar float-left-center"></i>&nbsp;{{pizza?.price}}</p>
+                      <p class="m-0" style="color: #000000c1;">{{pizza?.ingredients}}</p><br>
+                      <p class="m-0" style="color: #075905;"><i class="fa fa-dollar float-left-center"></i>&nbsp;{{pizza?.price}}</p>
                       <div class="card-body">
                         <div class="float-right btn-group btn-group-sm">
                             <a (click)="onOpenModal(pizza, 'edit')" href="#" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
