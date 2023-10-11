@@ -4,7 +4,6 @@
 body{
     margin-top:00px;
     background-image: url("https://t3.ftcdn.net/jpg/03/40/93/00/360_F_340930009_WtmPbofCmuBGo3SxTR59e3qUrUs8Bm2Y.jpg");
-
 }
 
 .headerh2 {
@@ -12,6 +11,22 @@ body{
     font-weight: 100;
     color: #000000;
     
+  }
+
+  
+  #pineappleAlert{
+    display: block;
+     margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    background: #a10000d8;
+    height: 200px;
+    text-align: center;
+    align-items: center;
+    padding: 50px 0;
+    color: #ffffff;
+    margin-bottom: 60px;
+    border-radius: 30px;
   }
 
 .card {
@@ -25,6 +40,7 @@ body{
 .w-60 {
     width: 100px;
 }
+
 
 #neubar {
     background: #9a7343e2;
@@ -55,3 +71,4 @@ body{
     color: #454545
   }
   
+ 

@@ -18,15 +18,15 @@ export class AppComponent implements OnInit{
   constructor(private menuService: MenuService) {}
 
 ngOnInit() {
- 
   this.getPizzas();
+  this.pinappleAlarm(this.editPizza);
 }
 
 public getPizzas(): void {
     this.menuService.getPizzas().subscribe(
     (response: Pizza[]) => {
-    this.pizzas =response;
-    },
+    this.pizzas = response;
+  },
     (error: HttpErrorResponse) => {
       alert(error.message);
     }
@@ -40,6 +40,7 @@ public onAddPizza(addForm: NgForm): void {
     console.log(response);
     this.getPizzas();
     addForm.reset();
+    this.pinappleAlarm(response);
   },
   (error: HttpErrorResponse) => {
     alert(error.message);
@@ -52,6 +53,7 @@ public onUpdatePizza(pizza: Pizza): void {
   this.menuService.updatePizza(pizza).subscribe(
   (response: Pizza) => {
     console.log(response);
+    this.pinappleAlarm(pizza);
     this.getPizzas();
   },
   (error: HttpErrorResponse) => {
@@ -75,13 +77,23 @@ public onDeletePizza(pizzaId: number): void {
 public searchePizzas(key: string): void {
   const results: Pizza[] = [];
   for (const pizza of this.pizzas) {
-    if (pizza.name.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+    if (pizza.name.toLowerCase().indexOf(key.toLowerCase()) !== -1
+    || pizza.ingredients.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
       results.push(pizza);
     }
   }
   this.pizzas = results;
   if (!key) {
     this.getPizzas();
+  }
+}
+
+public pinappleAlarm(hawaiiPizza: Pizza): void {
+  this.editPizza = hawaiiPizza;
+  let substr= 'pineapple';
+  if (hawaiiPizza.ingredients.includes(substr)){
+    console.log('PINEAPPLE ON PIZZA');
+    this.onOpenModal(hawaiiPizza, 'pineapple');
   }
 }
 
@@ -102,6 +114,10 @@ public searchePizzas(key: string): void {
   if (mode === 'delete') {
     this.deletePizza = pizza;
     button.setAttribute('data-target', '#deletePizzaModal');
+  }
+  if (mode === 'pineapple') {
+    this.deletePizza = pizza;
+    button.setAttribute('data-target', '#pineapplePizzaModal');
   }
   container.appendChild(button);
   button.click();

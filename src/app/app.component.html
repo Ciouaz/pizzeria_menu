@@ -1,28 +1,29 @@
 <nav class="navbar navbar-expand-sm navbar-light" id="neubar">
    <div class="container">
-     <div class="navbar-brand" href="#"><img src="https://png.pngtree.com/png-vector/20220705/ourmid/pngtree-pizza-logo-design-png-image_5683063.png" height="100"/>
+      <div class="navbar-brand" href="#"><img
+            src="https://png.pngtree.com/png-vector/20220705/ourmid/pngtree-pizza-logo-design-png-image_5683063.png"
+            height="100" />
       </div>
       <li class="navbar-brand">Admin panel:</li>
       <div class=" collapse navbar-collapse" id="navbarNavDropdown">
-       <ul class="navbar-nav ms-auto ">
-         <li class="nav-item">
-           <a (click)="onOpenModal(null, 'add')" href="#" class="nav-link mx-2 active">Add Pizza<span class="sr-only">(current)</span></a>
-         </li>  
-       </ul>
-   
-     </div>
-     <form class="form-inline my-2 my-lg-0">
-      <input type="search"
-      style="box-shadow: 4px 4px 8px #ddc1a0, -4px -4px 8px #f7e5cc; 
+         <ul class="navbar-nav ms-auto ">
+            <li class="nav-item">
+               <a (click)="onOpenModal(null, 'add')" href="#" class="nav-link mx-2 active">Add Pizza<span
+                     class="sr-only">(current)</span></a>
+            </li>
+         </ul>
+
+      </div>
+      <form class="form-inline my-2 my-lg-0">
+         <input type="search" style="box-shadow: 4px 4px 8px #ddc1a0, -4px -4px 8px #f7e5cc; 
       background-image: url(https://cdn2.hubspot.net/hubfs/4004166/bioticresearch_website_assets/images/search_icon.png);
       background-repeat: no-repeat;
       background-position: right center;
-      " 
-      (ngModelChange)="searchePizzas(key.value)" #key="ngModel" ngModel
-      name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search pizza..." required>
-   </form> 
+      " (ngModelChange)="searchePizzas(key.value)" #key="ngModel" ngModel name="key" id="searchName"
+            class="form-control mr-sm-2" placeholder="Search pizza..." required>
+      </form>
    </div>
- </nav>
+</nav>
 
 
 <div style="margin-bottom: 30px;">
@@ -30,158 +31,213 @@
 </div>
 
 
+
 <div class="container" id="main-container">
-  <div class="row">
+   <div class="row">
       <div *ngFor="let pizza of pizzas" class="col-md-6 col-x1-3">
-          <div class="card m-b-30">
-              <div class="card-body row">
-                  <div class="col-6">
-                      <img src="{{pizza?.pictureURL}}" alt="" class="img-fluid rounded-circle w-100">
+         <div class="card m-b-30">
+            <div class="card-body row">
+               <div class="col-6">
+                  <img src="{{pizza?.pictureURL}}" alt="" class="img-fluid rounded-circle w-100">
+               </div>
+               <div class="col-6 card-title align-self-center mb-0">
+                  <h5><i *ngIf="pizza?.vegan" class="fa fa-leaf" style="color: #075905;"></i>{{pizza?.name}} </h5>
+                  <p class="m-0" style="color: #000000c1;">{{pizza?.ingredients}}</p><br>
+                  <p class="m-0" style="color: #075905;"><i
+                        class="fa fa-dollar float-left-center"></i>&nbsp;{{pizza?.price}}</p>
+                  <div class="card-body">
+                     <div class="float-right btn-group btn-group-sm">
+                        <a (click)="onOpenModal(pizza, 'edit')" href="#" class="btn btn-secondary tooltips"
+                           data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i
+                              class="fa fa-pencil"></i> </a>
+                        <a (click)="onOpenModal(pizza, 'delete')" href="#" class="btn btn-danger tooltips"
+                           data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i
+                              class="fa fa-times"></i></a>
+                     </div>
                   </div>
-                  <div class="col-6 card-title align-self-center mb-0">
-                      <h5><i *ngIf="pizza?.vegan" class="fa fa-leaf" style="color: #075905;"></i>{{pizza?.name}} </h5>
-                      <p class="m-0" style="color: #000000c1;">{{pizza?.ingredients}}</p><br>
-                      <p class="m-0" style="color: #075905;"><i class="fa fa-dollar float-left-center"></i>&nbsp;{{pizza?.price}}</p>
-                      <div class="card-body">
-                        <div class="float-right btn-group btn-group-sm">
-                            <a (click)="onOpenModal(pizza, 'edit')" href="#" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
-                            <a (click)="onOpenModal(pizza, 'delete')" href="#" class="btn btn-danger tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>
-                        </div>
-                    </div>
-                    </div>
-              </div>
-          </div>
-      </div>
-  </div>
-
-<!-- Add Pizza Modal -->
-<div class="modal fade" id="addPizzaModal" tabindex="-1" role="dialog" aria-labelledby="addPizzaModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Pizza</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <form #addForm="ngForm" (ngSubmit)="onAddPizza(addForm)">
-         <div class="form-group">
-            <label for="name">Pizza name:</label>
-            <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Margarita..." required>
+               </div>
+            </div>
          </div>
-         
-         <div class="form-group">
-            <label for="ingredients">Ingredients:</label>
-           <input type="text" ngModel name="ingredients" class="form-control" id="ingredients" placeholder="mozzarella, tomatoes, onions, mushrooms..." nonrequired>
-         </div>
-      
-         <div class="form-group">
-            <label for="price">Price:</label>
-            <input type="text" ngModel name="price" class="form-control" id="price" placeholder="21.37..." required>
-         </div>
-         <div class="form-group">
-
-            <style> 
-               input.largerCheckbox { 
-                  vertical-align: middle;
-                  width: 20px; 
-                  height: 20px; 
-               } 
-           </style> 
-
-            <label for="vegan">Vegetarian?? &nbsp;</label>
-            <input type="checkbox" class="largerCheckbox" ngModel name="vegan" id="vegan" nonrequired>
-       
-         </div>
-         <div class="form-group">
-            <label for="pictureURL">Image URL:</label>
-            <input type="text" ngModel name="pictureURL" class="form-control" id="pictureURL" placeholder="https://pizzaphoto.pl/margarita.png..." nonrequired>
-         </div>
-         <div class="modal-footer">
-            <button type="button" id="add-pizza-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
-         </div>
-         </form>
       </div>
    </div>
- </div>
- </div>
 
-<!-- Edit Pizza Modal -->
-<div class="modal fade" id="updatePizzaModal" tabindex="-1" role="dialog" aria-labelledby="pizzaEditModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-     <div class="modal-content">
-        <div class="modal-header">
-           <h5 class="modal-title" id="updatePizzaModalLabel">Edit Pizza {{editPizza?.name}}</h5>
-           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-           <span aria-hidden="true">&times;</span>
-           </button>
-        </div>
-        <div class="modal-body">
-           <form #editForm="ngForm">
-              <div class="form-group">
-                 <label for="name">Pizza name:</label>
-                 <input type="text" ngModel="{{editPizza?.name}}" name="name" class="form-control" id="name">
-              </div>
 
-              <input type="hidden" ngModel="{{editPizza?.id}}" name="id" class="form-control" id="id">
-             
-              <div class="form-group">
-                 <label for="ingredients">Ingredients:</label>
-                 <input type="text" ngModel="{{editPizza?.ingredients}}" name="ingredients" class="form-control" id="ingredients">
-              </div>
-              <div class="form-group">
-                 <label for="price">Price:</label>
-                 <input type="text" ngModel="{{editPizza?.price}}" name="price" class="form-control" id="price">
-              </div>
-              <div class="form-group">
-                 <label for="vegan">Vegetarian? &nbsp;</label>
-                 <!-- because of this strange duplication code works correctly :) -->
-                 <input *ngIf="editPizza?.vegan" type="checkbox" [(ngModel)]="editPizza.vegan" class="largerCheckbox" name="vegan" id="vegan">
-                 <input *ngIf="editPizza?.vegan === false" type="checkbox" [(ngModel)]="editPizza.vegan" class="largerCheckbox" name="vegan" id="vegan">
-             
-              </div>
-              <div class="form-group">
-                 <label for="imageURL">Image URL</label>
-                 <input type="text" ngModel="{{editPizza?.pictureURL}}" name="pictureURL" class="form-control" id="pictureURL">
-              </div>
-              <div class="modal-footer">
-                 <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
-                 <button (click)="onUpdatePizza(editForm.value)" data-dismiss="modal" class="btn btn-primary">Save changes</button>
-              </div>
-           </form>
-        </div>
-     </div>
-  </div>
+
+   <!-- Add Pizza Modal -->
+   <div class="modal fade" id="addPizzaModal" tabindex="-1" role="dialog" aria-labelledby="addPizzaModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Add Pizza</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <form #addForm="ngForm" (ngSubmit)="onAddPizza(addForm)">
+                  <div class="form-group">
+                     <label for="name">Pizza name:</label>
+                     <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Margarita..."
+                        required>
+                  </div>
+
+                  <div class="form-group">
+                     <label for="ingredients">Ingredients:</label>
+                     <input type="text" ngModel name="ingredients" class="form-control" id="ingredients"
+                        placeholder="mozzarella, tomatoes, onions, mushrooms..." nonrequired>
+                  </div>
+
+                  <div class="form-group">
+                     <label for="price">Price:</label>
+                     <input type="text" ngModel name="price" class="form-control" id="price" placeholder="21.37..."
+                        required>
+                  </div>
+                  <div class="form-group">
+
+                     <style>
+                        input.largerCheckbox {
+                           vertical-align: middle;
+                           width: 20px;
+                           height: 20px;
+                        }
+                     </style>
+
+                     <label for="vegan">Vegetarian? &nbsp;</label>
+                     <input type="checkbox" class="largerCheckbox" ngModel name="vegan" id="vegan" nonrequired>
+
+                  </div>
+                  <div class="form-group">
+                     <label for="pictureURL">Image URL:</label>
+                     <input type="text" ngModel name="pictureURL" class="form-control" id="pictureURL"
+                        placeholder="https://pizzaphoto.pl/margarita.png..." nonrequired>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" id="add-pizza-form" class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
+                     <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+
+   <!-- Edit Pizza Modal -->
+   <div class="modal fade" id="updatePizzaModal" tabindex="-1" role="dialog" aria-labelledby="pizzaEditModalLabel"
+      aria-hidden="true" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="updatePizzaModalLabel">Edit Pizza {{editPizza?.name}}</h5>
+               <button (click)="onUpdatePizza(editForm.value)" type="button" class="close" data-dismiss="modal"
+                  aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <form #editForm="ngForm">
+                  <div class="form-group">
+                     <label for="name">Pizza name:</label>
+                     <input type="text" ngModel="{{editPizza?.name}}" name="name" class="form-control" id="name" required>
+                  </div>
+
+                  <input type="hidden" ngModel="{{editPizza?.id}}" name="id" class="form-control" id="id">
+
+                  <div class="form-group">
+                     <label for="ingredients">Ingredients:</label>
+                     <input type="text" ngModel="{{editPizza?.ingredients}}" name="ingredients" class="form-control"
+                        id="ingredients" required>
+                  </div>
+                  <div class="form-group">
+                     <label for="price">Price:</label>
+                     <input type="text" ngModel="{{editPizza?.price}}" name="price" class="form-control" id="price" required>
+                  </div>
+                  <div class="form-group">
+                     <label for="vegan">Vegetarian? &nbsp;</label>
+                     <!-- because of this strange duplication code works correctly :) -->
+                     <input *ngIf="editPizza?.vegan" type="checkbox" [(ngModel)]="editPizza.vegan"
+                        class="largerCheckbox" name="vegan" id="vegan">
+                     <input *ngIf="editPizza?.vegan === false" type="checkbox" [(ngModel)]="editPizza.vegan"
+                        class="largerCheckbox" name="vegan" id="vegan" nonrequired>
+
+                  </div>
+                  <div class="form-group">
+                     <label for="imageURL">Image URL</label>
+                     <input type="text" ngModel="{{editPizza?.pictureURL}}" name="pictureURL" class="form-control"
+                        id="pictureURL" nonrequired>
+                  </div>
+                  <div class="modal-footer">
+                     <button (click)="pinappleAlarm(editPizza)" type="button" id="" data-dismiss="modal"
+                        class="btn btn-secondary">Close</button>
+                     <button [disabled]="editForm.invalid" (click)="onUpdatePizza(editForm.value)" data-dismiss="modal" class="btn btn-primary">Save
+                        changes</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Pineapple Modal -->
+   <div class="modal fade" role="dialog" id="pineapplePizzaModal" 
+      style=" 
+         background: #a10000c0;
+         text-align: center;
+         align-items: center;
+         padding: 300px 0;
+         color: #ffffff;" 
+      data-backdrop="static" aria-hidden="true" keyboard="false">
+      <div class="modal-dialog" style="min-width: 800px;">
+         <h1 style="margin-bottom: 50px;"><img
+               src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Stop_sign.png/600px-Stop_sign.png"
+               height="200" /></h1>
+         <h1>
+            YOU PUT PINEAPPLE ON PIZZA!
+         </h1>
+      </div>
+      <div class="modal-content" style="background: #a1000000; border: #ffffff00;">
+         <div class="modal-body">
+            <button (click)="onOpenModal(editPizza, 'edit')" class="btn btn-danger" data-dismiss="modal"
+               aria-label="Close">
+               <h2>Forgive me!</h2>
+            </button>
+         </div>
+      </div>
+   </div>
+
+   <!-- Delete Modal -->
+   <div class="modal fade" id="deletePizzaModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="deleteModelLabel">Delete Pizza {{deletePizza?.name}}</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <p>Are you sure you want to delete pizza {{deletePizza?.name}}?</p>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                  <button (click)="onDeletePizza(deletePizza?.id)" class="btn btn-danger"
+                     data-dismiss="modal">Yes</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
 
- <!-- Delete Modal -->
-<div class="modal fade" id="deletePizzaModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-     <div class="modal-content">
-        <div class="modal-header">
-           <h5 class="modal-title" id="deleteModelLabel">Delete Pizza {{deletePizza?.name}}</h5>
-           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-           <span aria-hidden="true">&times;</span>
-           </button>
-        </div>
-        <div class="modal-body">
-           <p>Are you sure you want to delete pizza {{deletePizza?.name}}?</p>
-           <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-              <button (click)="onDeletePizza(deletePizza?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
-           </div>
-        </div>
-     </div>
-  </div>
-</div>
-</div>
+
 
 <!-- Notification for no pizzas -->
 <div *ngIf="pizzas?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
-  <div class="alert alert-info" role="alert">
-    <h4 class="alert-heading">NO PIZZAS!</h4>
-    <p>No pizzas were found.</p>
-  </div>
-  </div>
+   <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading">NO PIZZAS!</h4>
+      <p>No pizzas were found.</p>
+   </div>
+</div>
