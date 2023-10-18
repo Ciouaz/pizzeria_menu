@@ -1,0 +1,38 @@
+{
+        "name": "Margherita",
+        "ingredients": "mozzarella, tomatoes",
+        "price": 19.20,
+        "vegan": true,
+        "pictureURL": "https://mondopazzo.pl/wp-content/uploads/2021/06/margherita.png"
+}
+
+{
+       "name": "Capriciossa",
+        "ingredients": "mozzarella, tomatoes, ham, mushrooms",
+        "price": 22.80,
+        "vegan": false,
+        "pictureURL": "https://www.veropizza.com/storage/app/public/pizzas/May2020/lrYatE9HyMWFQOFXHiqY.gif"
+
+{
+        "name": "Mexicana",
+        "ingredients": "mozzarella, jalapeno, tomatoes, beef",
+        "price": 24.20,
+        "vegan": false,
+        "pictureURL": "https://www.pizzapatron.com/wp-content/themes/patron/dist/img/mexicanaWebp.webp"
+}
+
+ {
+        "name": "Quattro formaggi",
+        "ingredients": "cheese, cheese, cheese, cheese",
+        "price": 20.70,
+        "vegan": true,
+        "pictureURL": "https://pizzulu.com/cdn/shop/products/IMG_6806_503x503.png?v=1642438512"
+}
+
+{
+        "name": "Polish",
+        "ingredients": "sousage, onion, tears",
+        "price": 21.37,
+        "vegan": false,
+        "pictureURL": "https://d3iiunu4hwm6x4.cloudfront.net/images/transforms/Menu-Items/_menuItemTransform/HAP_Web_Menu-ParadisePie.png"
+}
