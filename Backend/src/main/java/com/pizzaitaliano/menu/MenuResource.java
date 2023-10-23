@@ -38,12 +38,17 @@ public class MenuResource {
 
     @PutMapping("/update")
     public ResponseEntity<Pizza> updatePizza(@RequestBody Pizza pizza) {
-        Pizza updatePizza = menuService.addPizza(pizza);
-        return new ResponseEntity<>(updatePizza, HttpStatus.OK);
+        Pizza updatePizza = menuService.updatePizza(pizza);
+        if (pizza.getId() != null) {
+            return new ResponseEntity<>(updatePizza, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(updatePizza, HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<?> deletePizza(@PathVariable("id") Long id) {
+        Pizza pizza = menuService.findPizzaById(id);
         menuService.deletePizza(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -13,7 +13,8 @@ import lombok.*;
 @ToString
 public class Pizza implements Serializable {
 
-    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     private Long id;
     private String name;

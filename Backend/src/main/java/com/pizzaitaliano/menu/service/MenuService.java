@@ -22,6 +22,10 @@ public class MenuService {
         return pizzaRepo.save(pizza);
     }
 
+    public Pizza updatePizza(Pizza pizza) {
+        return pizzaRepo.save(pizza);
+    }
+
     public List<Pizza> findAllPizzas() {
         return pizzaRepo.findAll();
     }
@@ -31,7 +35,7 @@ public class MenuService {
                 .orElseThrow(()-> new PizzaNotFoundException("Pizza by id " + id + " was not found"));
     }
 
-    public void deletePizza(long id) {
+    public void deletePizza(Long id) {
         pizzaRepo.deleteById(id);
     }
 }
