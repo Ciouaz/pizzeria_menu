@@ -148,7 +148,7 @@ class MenuResourceTest {
     }
 
     //Positive scenario
-    //JUnit test for UPDATE pizza by id
+    //JUnit test for UPDATE pizza
     @Test
     void givenUpdatePizza_whenUpdatePizza_thenReturnUpdatePizzaObject() throws Exception {
 
@@ -188,13 +188,14 @@ class MenuResourceTest {
     }
 
     //Negative scenario
-    //JUnit test for UPDATE pizza by id
+    //JUnit test for UPDATE pizza
     @Test
     void givenUpdatePizza_whenUpdatePizza_thenReturn404() throws Exception {
 
         //given
         long pizzaId = 1L;
         Pizza savedPizza = Pizza.builder()
+                .id(pizzaId)
                 .name("Margherita")
                 .ingredients("mozzarella, tomatoes")
                 .price(21.37)
@@ -202,15 +203,17 @@ class MenuResourceTest {
                 .pictureURL("https://mondopazzo.pl/wp-content/uploads/2021/06/margherita.png")
                 .build();
         Pizza updatedPizza = Pizza.builder()
+                .id(pizzaId)
                 .name("Capriciossa")
                 .ingredients("mozzarella, tomatoes, ham, mushrooms")
                 .price(22.80)
                 .vegan(false)
                 .pictureURL("https://www.veropizza.com/storage/app/public/pizzas/May2020/lrYatE9HyMWFQOFXHiqY.gif")
                 .build();
-        given(menuService.findPizzaById(pizzaId)).willReturn(null);
+
         given(menuService.updatePizza(any(Pizza.class)))
                 .willAnswer((invocation)-> invocation.getArgument(0));
+        given(menuService.findPizzaById(pizzaId)).willThrow(new PizzaNotFoundException("Pizza by id " + pizzaId + " was not found"));
 
         //when
         ResultActions response = mockMv.perform(put("/pizza-italiano/update")
@@ -245,12 +248,12 @@ class MenuResourceTest {
     void givenPizzaId_whenDeletePizza_thenReturn404() throws Exception {
 
         //given
-        long pizzaId = 1L;
-        long wrongId = 2L;
-        willDoNothing().given(menuService).deletePizza(pizzaId);
+        Long pizzaId = null;
+        willThrow(new PizzaNotFoundException("Pizza by id " + pizzaId + " was not found"))
+                .given(menuService).deletePizza(pizzaId);
 
         //when
-        ResultActions response = mockMv.perform(delete("/pizza-italiano/delete/{id}", wrongId));
+        ResultActions response = mockMv.perform(delete("/pizza-italiano/delete/{id}", pizzaId));
 
         //then
         response.andExpect(status().isNotFound())

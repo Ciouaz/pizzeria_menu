@@ -1,5 +1,6 @@
 package com.pizzaitaliano.menu;
 
+import com.pizzaitaliano.menu.exception.PizzaNotFoundException;
 import com.pizzaitaliano.menu.model.Pizza;
 import com.pizzaitaliano.menu.service.MenuService;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,11 @@ public class MenuResource {
 
     @GetMapping("/menu/{id}")
     public ResponseEntity<Pizza> getPizzaById(@PathVariable("id") Long id) {
+        try {
+            menuService.findPizzaById(id);
+        } catch (PizzaNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         Pizza pizza = menuService.findPizzaById(id);
         return new ResponseEntity<>(pizza, HttpStatus.OK);
     }
@@ -38,17 +44,22 @@ public class MenuResource {
 
     @PutMapping("/update")
     public ResponseEntity<Pizza> updatePizza(@RequestBody Pizza pizza) {
-        Pizza updatePizza = menuService.updatePizza(pizza);
-        if (pizza.getId() != null) {
-            return new ResponseEntity<>(updatePizza, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(updatePizza, HttpStatus.NOT_FOUND);
+        try {
+            menuService.findPizzaById(pizza.getId());
+        } catch (PizzaNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
+        Pizza updatePizza = menuService.updatePizza(pizza);
+        return new ResponseEntity<>(updatePizza, HttpStatus.OK);
+        }
 
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<?> deletePizza(@PathVariable("id") Long id) {
-        Pizza pizza = menuService.findPizzaById(id);
+    public ResponseEntity<HttpStatus> deletePizza(@PathVariable("id") Long id) {
+        try {
+            menuService.findPizzaById(id);
+        } catch (PizzaNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         menuService.deletePizza(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
